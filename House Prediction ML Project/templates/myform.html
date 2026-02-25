@@ -1,0 +1,196 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/predict" method="post">
+        <label for="">Area</label>
+        <input type="text" name="area">
+
+        <label for="">Bedroom</label>
+        <input type="text" name="bedroom">
+        
+        <label for="">Age</label>
+        <input type="text" name="age">
+        
+        <input type="submit" value="Predict">
+    </form>
+    <h2>{{ Prediction_text }}</h2>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Pridiction</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px;
+            width: 350px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: white;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: #ffffff;
+            color: #a24b6c;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover{
+            background: #f1efef;
+            transform: scale(1.05);
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        /* ===== Popup Modal (CSS only) ===== */
+
+        .modal {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .modal:target {
+                opacity: 1;
+                pointer-events: auto;
+        }
+       
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 300px;
+            color: #333;
+            animation: popup 0.3s ease;
+        }
+
+        @keyframes popup {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .close-btn {
+           display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🏠 House Price Prediction</h1>
+
+    <form action="/predict" method="post">
+        <div class="input-group">
+            <label>Area (sq ft)</label>
+            <input type="number" name="area" required>
+        </div>
+
+        <div class="input-group">
+            <label>Bedrooms</label>
+            <input type="number" name="bedroom" required>
+        </div>
+
+        <div class="input-group">
+            <label>Age (years)</label>
+            <input type="number" name="age" required>
+        </div>
+
+        <button type="submit">predict_price</button>
+
+    </form>
+</div>
+
+  <!-- ===== Modal ===== -->
+<div id="popup" class="modal">
+    <div class="modal-content">
+        <h3>Predicted Price</h3>
+        <p>₹ {{ Prediction_text }}</p>
+        <a href="#" class="close-btn">Close</a>
+    </div>
+</div>
+
+</body>
+</html>
